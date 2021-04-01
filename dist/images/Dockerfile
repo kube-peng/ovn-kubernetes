@@ -21,6 +21,10 @@ USER root
 ENV PYTHONDONTWRITEBYTECODE yes
 
 COPY kubernetes.repo /etc/yum.repos.d/kubernetes.repo
+
+RUN sed -i s#gpgcheck=1#gpgcheck=0# /etc/yum.repos.d/kubernetes.repo \
+    sed -i s#repo_gpgcheck=1#repo_gpgcheck=0# /etc/yum.repos.d/kubernetes.repo
+    
 RUN INSTALL_PKGS=" \
 	PyYAML bind-utils procps-ng openssl numactl-libs firewalld-filesystem \
 	libpcap kubectl \
